@@ -10,11 +10,11 @@
 
 \title{Princípios Arquiteturais REST e Arquitetura de Microserviços: Integração e Benefícios}
 
-\author{João Pedro R. Leite\inst{1}, Guilherme B. Spiger\inst{2}}
+\author{João Pedro R. Leite\inst{1}, Guilherme B. Spiger\inst{1}}
 
-\address{Tecnologia em Sistemas para Internet\\Universidade Tecnológica Federal do Paraná (UTFPR)\\
+\address{Graduação de Tecnologia em Sistemas para Internet\\Universidade Tecnológica Federal do Paraná (UTFPR)\\
 	Rua Cristo Rei, 19 - Vila Becker - CEP 85902-490 - Toledo-PR
-	\email{joaopedroleite@alunos.utfpr.edu.br}
+	\email{joaopedroleite@alunos.utfpr.edu.br, gspiger@alunos.utfpr.edu.br}
 }
 
 \begin{document} 
@@ -33,7 +33,9 @@
 	
 	A evolução das demandas por sistemas distribuídos, escaláveis e resilientes impulsionou o desenvolvimento de novas abordagens arquiteturais, como os Princípios Arquiteturais REST e a Arquitetura de Microserviços. Ambas as arquiteturas, embora distintas em seu foco, compartilham a busca por flexibilidade e eficiência no desenvolvimento de sistemas modernos.
 	
-	A internet é essencial para o dia dia, pessoas o tempo todos estão utilizando ela para comprar produtos, ler jornais, livros, pagar contas, fazer transações bancárias, e conversar com outras pessoas através de redes sociais. E para que tudo isso funcione corretamente desenvolvedores procuram sempre construir as aplicações de modo que seja reutilizável, escalável e livre para qualquer plataforma. Os Microserviços incentivam a divisão de sistemas complexos em serviços independentes. Eles implementam a lógica para aplicação que é definida por alguns padrões de implementação, podendo ser CORBA, REST, SOAP, entre outros. Microserviços não dependem de plataformas específicas, portanto ele pode ser implementado em qualquer sistema operacional, utilizando qualquer linguagem de programação, e pode ser comunicar com outros Microserviços que utilizam outras tecnologias. A comunicação dos Microserviços é feita através de protocolos como o SOAP que tem um padão de estruturar mensagens para um documentos XML e devido a sua capacidade de armazenar o estado das requisições deixa a aplicação com uma complexidade maior. Já o REST, como estilo arquitetural, deixa a complexidade da aplicação menor, pois utiliza protocolo HTTP, e é Stateless, permitindo desenvolvedores menos experientes conectarem aplicações através de um estilo nativo da própria Web. define princípios que regem a comunicação na web de forma distribuída, escalável e flexível \cite{cavaleiro2013}.
+	A internet é essencial para o dia dia, pessoas o tempo todos estão utilizando ela para comprar produtos, ler jornais, livros, pagar contas, fazer transações bancárias, e conversar com outras pessoas através de redes sociais. E para que tudo isso funcione corretamente desenvolvedores procuram sempre construir as aplicações de modo que seja reutilizável, escalável e livre para qualquer plataforma e uma maneira de implementa-los é por meio de microserviços.
+	
+	Os Microserviços incentivam a divisão de sistemas complexos em serviços independentes. Eles implementam a lógica para aplicação que é definida por alguns padrões de implementação, podendo ser CORBA, REST, SOAP, entre outros. Microserviços não dependem de plataformas específicas, portanto eles podem ser implementados em qualquer sistema operacional, utilizando qualquer linguagem de programação, e podem se comunicar com outros Microserviços que utilizam outras tecnologias. A comunicação dos Microserviços é feita através de protocolos como o SOAP que estrutura mensagens em documentos XML e possui a capacidade de armazenar o estado das requisições o que deixa a aplicação com uma complexidade maior. Já o REST, como estilo arquitetural, deixa a complexidade da aplicação menor, pois utiliza protocolo HTTP, e é Stateless, permitindo desenvolvedores menos experientes conectarem aplicações através de um estilo nativo da própria Web. O padrão REST define princípios que regem a comunicação na web de forma distribuída, escalável e flexível \cite{cavaleiro2013}.
 	
 	Este trabalho tem como objetivo explorar a complementaridade entre essas abordagens, seus benefícios e os desafios encontrados na integração desses dois paradigmas, com foco na aplicação em ambientes de desenvolvimento distribuído.
 	
@@ -77,7 +79,7 @@ Os Princípios REST (Representational State Transfer), introduzidos por Roy Fiel
 		\item \textbf{Overhead de Rede}: O modelo de interação stateless implica que cada requisição deve carregar todas as informações necessárias, o que pode aumentar o volume de dados trafegados na rede, especialmente em operações de alta frequência ou com grandes quantidades de dados. Isso pode gerar overhead em situações onde a otimização de rede é crítica \cite{fielding2000}.
 	\end{itemize}
 	
-	Para resumir, o estilo arquitetural REST se destaca pela sua simplicidade, flexibilidade e capacidade de escalabilidade, características que o tornam ideal para aplicações modernas baseadas na web. Contudo, é importante equilibrar suas vantagens com as possíveis limitações para garantir uma implementação eficiente e segura.
+	Em resumo o estilo arquitetural REST se destaca pela sua simplicidade, flexibilidade e capacidade de escalabilidade, características que o tornam ideal para aplicações modernas baseadas na web. Contudo, é importante equilibrar suas vantagens com as possíveis limitações para garantir uma implementação eficiente e segura.
 
 	
 	\section{Arquitetura de Microserviços}
@@ -87,13 +89,24 @@ Os Princípios REST (Representational State Transfer), introduzidos por Roy Fiel
 	
 	\subsection{Evolução da Arquitetura Monolítica para Microsserviços}
 	
-	A transição da arquitetura monolítica para microsserviços reflete a necessidade de sistemas mais flexíveis e escaláveis, especialmente em empresas de grande porte. Enquanto as arquiteturas monolíticas agregam funcionalidades em um único bloco, os microsserviços separam as funcionalidades em componentes independentes, promovendo uma manutenção mais ágil e facilitando a identificação de problemas \cite{castro2021}. Essa mudança permite que cada serviço funcione de forma autônoma, o que torna possível realizar atualizações sem afetar o sistema como um todo.
+	A transição da arquitetura monolítica para microsserviços surge da necessidade de sistemas mais flexíveis e escaláveis, especialmente para empresas de grande porte. Enquanto as arquiteturas monolíticas agregam funcionalidades em um único bloco, os microsserviços separam as funcionalidades em componentes independentes, promovendo uma manutenção mais ágil e facilitando a identificação de problemas \cite{castro2021}. Basicamente os microserviços executam muito bem um processo e precisam se comunicar com outros serviços para formarem uma aplicação completa, deferentemente das aplicações monolíticas, onde tudo ocorre em um mesmo processo, compartilhando recursos\cite{garcia2021}. A figura \ref{fig:exampleFig1} representa as diferenças entre esses dois conceitos de arquitetura.  
+	A mudança para a arquitetura de microsserviços permite que cada serviço funcione de forma autônoma, o que torna possível realizar atualizações sem afetar o sistema como um todo.
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1\textwidth]{./img/monolito-e-microservicos.png}
+		\caption{Monolítico e Microsserviços
+			Adaptado de \cite{garcia2021}}
+		\label{fig:exampleFig1}
+	\end{figure}
+	
+	%ACHO QUE AQUI BUSCAR ALGUMA IMAGEM COMPARANDO MONOLITOS E MICROSERVICOS
 	
 	Empresas como Netflix e Walmart adotaram a arquitetura de microsserviços para lidar com altos volumes de tráfego e demandas de escalabilidade, resultando em economias de recursos e melhor desempenho operacional. A Walmart, por exemplo, economizou muito o poder de computação após a migração, enquanto a Netflix usa mais de 500 microsserviços para lidar com bilhões de solicitações diárias \cite{castro2021}.
 	
 	\subsection{Desafios da Implementação de Microsserviços}
 	
-	Embora os microsserviços ofereçam muitos benefícios, sua implementação não está isenta de desafios. A complexidade de gerenciar múltiplos serviços independentes pode aumentar a dificuldade na resolução de problemas, como destacado em estudos recentes, nos grande parte dos entrevistados relataram dificuldades na identificação de causas de erros em ambientes de microsserviços \cite{castro2021}. Assim, é essencial que as empresas se preparem adequadamente para essa transição, adotando práticas de monitoramento e integração contínua.
+	Embora os microsserviços ofereçam muitos benefícios, sua implementação não está isenta de desafios. A complexidade de gerenciar múltiplos serviços independentes pode aumentar a dificuldade na resolução de problemas, como destacado em estudos recentes, grande parte dos entrevistados relataram dificuldades na identificação de causas de erros em ambientes de microsserviços \cite{castro2021}. Assim, é essencial que as empresas se preparem adequadamente para essa transição, adotando práticas de monitoramento e integração contínua.
 	
 	
 	\subsection{Características dos Microserviços}
@@ -103,17 +116,19 @@ Os Princípios REST (Representational State Transfer), introduzidos por Roy Fiel
 		\item \textbf{Escalabilidade Independente}: Cada serviço pode ser escalado de acordo com suas necessidades específicas, otimizando o uso de recursos do sistema.
 	\end{itemize}
 	
-	\section{Integração entre REST e Microserviços}
+	\section{Integração entre REST e Microsserviços}
 	
 	A combinação de REST com Microserviços permite uma abordagem modular e eficiente, ideal para ambientes de sistemas distribuídos. O uso de APIs RESTful como interface para comunicação entre microserviços é amplamente adotado devido à simplicidade e interoperabilidade oferecidas \cite{newman2015}.
 	
 	\subsection{Benefícios da Integração}
+	A combinação de microserviços com REST facilita a escalabilidade, a manutenção e a evolução contínua dos sistemas, uma vez que cada microsserviço pode ser desenvolvido, implantado e escalado de forma independente, enquanto o REST garante a interoperabilidade e a simplicidade na comunicação entre eles. Isso se deve principalmente aos seguintes motivos:
 	\paragraph{Interface Uniforme}: O uso de APIs REST entre microserviços proporciona uma interface clara e padronizada para a comunicação entre diferentes componentes do sistema.
 	\paragraph{Escalabilidade e Desempenho}: Microserviços com comunicação baseada em REST podem ser escalados independentemente, enquanto o uso de cache e a arquitetura stateless garantem desempenho eficiente \cite{cavaleiro2013}.
 	
 	\section{Conclusão}
 	
-	Os Princípios REST, quando aplicados a uma Arquitetura de Microserviços, fornecem uma base robusta para sistemas distribuídos modernos. Embora ambas as abordagens apresentem desafios, como a gestão de segurança e complexidade operacional, os benefícios em termos de escalabilidade, resiliência e flexibilidade superam as dificuldades, permitindo o desenvolvimento de sistemas adaptáveis e resilientes \cite{fielding2000}.
+	Os Princípios REST, quando aplicados a uma Arquitetura de Microserviços, fornecem uma base robusta para sistemas distribuídos modernos. Embora tanto a Arquitetura REST quando os Microsserviços apresentem desafios, como a gestão de segurança e complexidade operacional, os benefícios em termos de escalabilidade, resiliência e flexibilidade superam as dificuldades, permitindo o desenvolvimento de sistemas adaptáveis e resilientes \cite{fielding2000}.
+	
 	
 	\bibliographystyle{sbc}
 	\begin{thebibliography}{99}
@@ -122,6 +137,8 @@ Os Princípios REST (Representational State Transfer), introduzidos por Roy Fiel
 		\bibitem{newman2015} NEWMAN, S. *Building Microservices: Designing Fine-Grained Systems*. O'Reilly Media, 2015.
 		\bibitem{castro2021} CASTRO, T. F. de S.; VALE, F. G. de M.; SOUSA, F. H. F. de. Microsserviços. *Brazilian Journal of Development*, v. 7, n. 3, p. 21829-21833, mar. 2021.
 		\bibitem{newcomer2002} NEWCOMER, E. *Understanding Web Services: XML, WSDL, SOAP, and UDDI*. Addison-Wesley Professional, 2002.
+		
+		\bibitem{garcia2021} GARCIA, G. B. *Do monolítico ao microserviço A transformação das equipes e sistemas*. nstituto Federal de Educação, Ciência e Tecnologia de São Paulo, 2021.
 				
 	\end{thebibliography}
 	
